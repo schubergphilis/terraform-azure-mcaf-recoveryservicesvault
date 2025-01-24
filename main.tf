@@ -11,7 +11,7 @@ resource "azurerm_recovery_services_vault" "this" {
   tags = merge(
     try(var.tags),
     tomap({
-      "Resource Type" = "Recovery Service Vault"
+      "Resource Type" = "Recovery Services Vault"
     })
   )
 
