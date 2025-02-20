@@ -1,6 +1,6 @@
 resource "azurerm_recovery_services_vault" "this" {
   name                          = var.recovery_services_vault.name
-  resource_group_name           = var.recovery_services_vault.resource_group_name
+  resource_group_name           = var.resource_group_name
   public_network_access_enabled = var.recovery_services_vault.public_network_access_enabled
   sku                           = var.recovery_services_vault.sku
   storage_mode_type             = var.recovery_services_vault.storage_mode_type
