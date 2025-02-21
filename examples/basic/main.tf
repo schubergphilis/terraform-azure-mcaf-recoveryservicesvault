@@ -19,7 +19,7 @@ module "recoveryservicesvault" {
     sku = {
       name = "Standard"
     }
-    storage_mode_type                = GeoRedundant
+    storage_mode_type                = "GeoRedundant"
     cross_region_restore_enabled     = true
     soft_delete_enabled              = true
     system_assigned_identity_enabled = true
