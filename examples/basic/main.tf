@@ -23,7 +23,7 @@ module "recoveryservicesvault" {
     cross_region_restore_enabled     = true
     soft_delete_enabled              = true
     system_assigned_identity_enabled = true
-    immutability                     = 0
+    immutability                     = "Unlocked"
   }
 
   rsv_encryption = {
@@ -36,7 +36,7 @@ module "recoveryservicesvault" {
     name                           = "example-vm-backup-policy"
     timezone                       = "UTC"
     instant_restore_retention_days = 5
-    policy_type                    = "VMBkp"
+    policy_type                    = "AzureIaasVM"
     frequency                      = "Daily"
     retention_daily                = 7
 
