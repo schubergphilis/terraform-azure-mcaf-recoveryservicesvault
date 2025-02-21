@@ -13,12 +13,10 @@ module "recoveryservicesvault" {
   source              = "../../"
   resource_group_name = "example-recovery-services-vault-rg"
   recovery_services_vault = {
-    name                          = "example-recoveryservicesvault"
-    location                      = "eastus"
-    public_network_access_enabled = false
-    sku = {
-      name = "Standard"
-    }
+    name                             = "example-recoveryservicesvault"
+    location                         = "eastus"
+    public_network_access_enabled    = false
+    sku                              = "Standard"
     storage_mode_type                = "GeoRedundant"
     cross_region_restore_enabled     = true
     soft_delete_enabled              = true
