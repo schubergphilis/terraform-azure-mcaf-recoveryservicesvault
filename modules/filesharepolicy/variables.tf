@@ -10,8 +10,8 @@ variable "recovery_services_vault_name" {
 
 variable "file_share_backup_policy" {
   type = object({
-    name     = string
-    timezone = string
+    name      = string
+    timezone  = string
     frequency = string
 
     retention_daily = optional(number, null)

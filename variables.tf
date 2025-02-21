@@ -145,9 +145,9 @@ variable "vm_backup_policy" {
 
 variable "file_share_backup_policy" {
   type = map(object({
-    name     = string
-    timezone = string
-    frequency = string
+    name            = string
+    timezone        = string
+    frequency       = string
     retention_daily = optional(number, null)
 
     backup = object({
