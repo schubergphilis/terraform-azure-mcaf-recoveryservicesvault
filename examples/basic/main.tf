@@ -33,66 +33,69 @@ module "recoveryservicesvault" {
   }
 
   vm_backup_policy = {
-    name                           = "example-vm-backup-policy"
-    timezone                       = "UTC"
-    instant_restore_retention_days = 5
-    policy_type                    = "AzureIaasVM"
-    frequency                      = "Daily"
-    retention_daily                = 7
+    example_policy = {
+      name                           = "example-vm-backup-policy"
+      timezone                       = "UTC"
+      instant_restore_retention_days = 5
+      policy_type                    = "AzureIaasVM"
+      frequency                      = "Daily"
+      retention_daily                = 7
 
-    backup = {
-      time          = "23:00"
-      hour_interval = 6
-      hour_duration = 12
-      weekdays      = ["Monday", "Wednesday"]
-    }
+      backup = {
+        time          = "23:00"
+        hour_interval = 6
+        hour_duration = 12
+        weekdays      = ["Monday", "Wednesday"]
+      }
 
-    retention_weekly = {
-      count    = 4
-      weekdays = ["Monday", "Wednesday"]
-    }
+      retention_weekly = {
+        count    = 4
+        weekdays = ["Monday", "Wednesday"]
+      }
 
-    retention_monthly = {
-      count = 12
-      days  = [1, 15]
-    }
+      retention_monthly = {
+        count = 12
+        days  = [1, 15]
+      }
 
-    retention_yearly = {
-      count  = 10
-      months = ["January", "July"]
-      days   = [1, 15]
+      retention_yearly = {
+        count  = 10
+        months = ["January", "July"]
+        days   = [1, 15]
+      }
     }
   }
 
   file_share_backup_policy = {
-    name            = "example-file-share-backup-policy"
-    timezone        = "UTC"
-    frequency       = "Daily"
-    retention_daily = 7
+    example_policy = {
+      name            = "example-file-share-backup-policy"
+      timezone        = "UTC"
+      frequency       = "Daily"
+      retention_daily = 7
 
-    backup = {
-      time = "23:00"
-      hourly = {
-        interval        = 6
-        start_time      = "00:00"
-        window_duration = 12
+      backup = {
+        time = "23:00"
+        hourly = {
+          interval        = 6
+          start_time      = "00:00"
+          window_duration = 12
+        }
+      }
+      retention_weekly = {
+        count    = 4
+        weekdays = ["Monday", "Wednesday"]
+      }
+      retention_monthly = {
+        count = 12
+        days  = [1, 15]
+      }
+      retention_yearly = {
+        count  = 10
+        months = ["January", "July"]
+        days   = [1, 15]
       }
     }
-    retention_weekly = {
-      count    = 4
-      weekdays = ["Monday", "Wednesday"]
-    }
-    retention_monthly = {
-      count = 12
-      days  = [1, 15]
-    }
-    retention_yearly = {
-      count  = 10
-      months = ["January", "July"]
-      days   = [1, 15]
-    }
   }
-
 
   tags = {
     environment = "prd"
