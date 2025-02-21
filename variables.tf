@@ -18,7 +18,7 @@ variable "recovery_services_vault" {
     storage_mode_type                = optional(string, "GeoRedundant")
     cross_region_restore_enabled     = optional(bool, false)
     soft_delete_enabled              = optional(bool, true)
-    system_assigned_identity_enabled = optional(bool, false)
+    system_assigned_identity_enabled = optional(bool, true)
     immutability                     = optional(string, null),
   })
 }
