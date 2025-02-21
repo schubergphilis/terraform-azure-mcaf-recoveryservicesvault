@@ -65,12 +65,11 @@ module "recoveryservicesvault" {
   }
 
   file_share_backup_policy = {
-    name              = "example-file-share-backup-policy"
-    retention_daily   = 7
-    retention_weekly  = 4
-    retention_monthly = 12
-    retention_yearly  = 10
-    time_zone         = "UTC"
+    name            = "example-file-share-backup-policy"
+    timezone        = "UTC"
+    frequency       = "Daily"
+    retention_daily = 7
+
     backup = {
       time = "23:00"
       hourly = {
