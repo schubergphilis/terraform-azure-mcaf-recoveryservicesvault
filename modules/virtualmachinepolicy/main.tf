@@ -33,13 +33,13 @@ resource "azurerm_backup_policy_vm" "this" {
   }
   dynamic "retention_weekly" {
     for_each = var.vm_backup_policy.retention_weekly.count > 0 && length(var.vm_backup_policy.retention_weekly.weekdays) > 0 ? { this = var.vm_backup_policy.retention_weekly } : {}
- 
+
     content {
       count    = var.vm_backup_policy.frequency == "Weekly" || var.vm_backup_policy.retention_weekly.count != 0 ? regex("^[1-9][0-9]{0,3}$", var.vm_backup_policy.retention_weekly.count) : null # 20
       weekdays = var.vm_backup_policy.retention_weekly.count != 0 && length(var.vm_backup_policy.retention_weekly.weekdays) > 0 ? var.vm_backup_policy.retention_weekly.weekdays : null
     }
   }
-  
+
   dynamic "retention_yearly" {
     for_each = var.vm_backup_policy.retention_yearly.count > 0 ? { this = var.vm_backup_policy.retention_yearly } : {}
 

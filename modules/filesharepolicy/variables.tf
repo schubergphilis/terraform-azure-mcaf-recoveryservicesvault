@@ -3,7 +3,7 @@ variable "resource_group_name" {
   description = "The name of the resource group in which the Recovery Services Vault should be created."
 }
 
-variable recovery_services_vault_name {
+variable "recovery_services_vault_name" {
   type        = string
   description = "The name of the Recovery Services Vault."
 }

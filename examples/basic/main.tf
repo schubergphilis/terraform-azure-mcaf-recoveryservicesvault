@@ -32,7 +32,7 @@ module "recoveryservicesvault" {
     cmk_identity           = "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-keyvault-rg/providers/Microsoft.KeyVault/vaults/example-keyvault"
   }
 
-vm_backup_policy = {
+  vm_backup_policy = {
     name                           = "example-vm-backup-policy"
     timezone                       = "UTC"
     instant_restore_retention_days = 5
@@ -41,36 +41,36 @@ vm_backup_policy = {
     retention_daily                = 7
 
     backup = {
-        time          = "23:00"
-        hour_interval = 6
-        hour_duration = 12
-        weekdays      = ["Monday", "Wednesday"]
+      time          = "23:00"
+      hour_interval = 6
+      hour_duration = 12
+      weekdays      = ["Monday", "Wednesday"]
     }
 
     retention_weekly = {
-        count    = 4
-        weekdays = ["Monday", "Wednesday"]
+      count    = 4
+      weekdays = ["Monday", "Wednesday"]
     }
 
     retention_monthly = {
-        count    = 12
-        days     = [1, 15]
+      count = 12
+      days  = [1, 15]
     }
 
     retention_yearly = {
-        count  = 10
-        months = ["January", "July"]
-        days   = [1, 15]
+      count  = 10
+      months = ["January", "July"]
+      days   = [1, 15]
     }
-}
+  }
 
   file_share_backup_policy = {
-    name = "example-file-share-backup-policy"
-    retention_daily = 7
-    retention_weekly = 4
+    name              = "example-file-share-backup-policy"
+    retention_daily   = 7
+    retention_weekly  = 4
     retention_monthly = 12
-    retention_yearly = 10
-    time_zone = "UTC"
+    retention_yearly  = 10
+    time_zone         = "UTC"
     backup = {
       time = "23:00"
       hourly = {
