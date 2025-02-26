@@ -21,21 +21,28 @@ resource "azurerm_recovery_services_vault" "this" {
   }
 
   dynamic "encryption" {
-    for_each = var.rsv_encryption.cmk_encryption_enabled == true ? [1] : []
+    for_each = var.recovery_services_vault.cmk_encryption_enabled ? [1] : []
 
     content {
       infrastructure_encryption_enabled = true
-      user_assigned_identity_id         = var.rsv_encryption.system_assigned_identity_enabled == true ? var.rsv_encryption.cmk_identity : null
-      use_system_assigned_identity      = var.rsv_encryption.system_assigned_identity_enabled
-      key_id                            = var.rsv_encryption.cmk_key_vault_key_id
+      user_assigned_identity_id         = var.recovery_services_vault.system_assigned_identity_enabled ? null : var.recovery_services_vault.cmk_identity
+      use_system_assigned_identity      = var.recovery_services_vault.system_assigned_identity_enabled
+      key_id                            = var.recovery_services_vault.cmk_key_vault_key_id
     }
   }
 
   dynamic "identity" {
-    for_each = var.recovery_services_vault.system_assigned_identity_enabled == true ? [1] : []
+    for_each = var.recovery_services_vault.system_assigned_identity_enabled ? [1] : []
 
     content {
       type = "SystemAssigned"
     }
   }
+}
+
+resource "azurerm_role_assignment" "this" {
+  count                = (var.recovery_services_vault.system_assigned_identity_enabled != null && var.recovery_services_vault.cmk_encryption_enabled != null) ? 1 : 0
+  principal_id         = azurerm_recovery_services_vault.this.identity[0].principal_id
+  scope                = var.recovery_services_vault.cmk_key_vault_key_id
+  role_definition_name = "Key Vault Crypto Service Encryption User"
 }
