@@ -44,6 +44,30 @@ variable "cross_region_restore_enabled" {
   default     = false
 }
 
+variable "system_assigned_identity_enabled" {
+  description = "Whether to use a system assigned identity for the vault."
+  type        = bool
+  default     = false
+}
+
+variable "cmk_identity_id" {
+  description = "The user-assigned identity to use for Customer Managed Key encryption."
+  type        = string
+  default     = null
+}
+
+variable "cmk_key_vault_key_id" {
+  description = "The Key Vault key ID for CMK encryption."
+  type        = string
+  default     = null
+}
+
+variable "user_assigned_resource_ids" {
+  description = "List of user-assigned resource IDs for identity assignment."
+  type        = list(string)
+  default     = []
+}
+
 variable "location" {
   description = "Location of the resources to create"
   type        = string
