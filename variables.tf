@@ -1,7 +1,6 @@
-variable "tags" {
-  type        = map(string)
-  description = "A map of tags to add to all resources."
-  default     = {}
+variable "name" {
+  description = "The name of the Recovery Services Vault."
+  type        = string
 }
 
 variable "resource_group_name" {
@@ -9,23 +8,53 @@ variable "resource_group_name" {
   description = "The name of the resource group in which the Recovery Services Vault should be created."
 }
 
-variable "recovery_services_vault" {
-  type = object({
-    name                             = string
-    location                         = string
-    public_network_access_enabled    = optional(bool, false)
-    sku                              = optional(string, "Standard")
-    storage_mode_type                = optional(string, "GeoRedundant")
-    cross_region_restore_enabled     = optional(bool, false)
-    soft_delete_enabled              = optional(bool, true)
-    system_assigned_identity_enabled = optional(bool, true)
-    cmk_encryption_enabled           = optional(bool, false)
-    cmk_identity                     = optional(string, null)
-    cmk_key_vault_key_id             = optional(string, null)
-    immutability                     = optional(string, null)
-    tags                             = optional(map(string), {})
-  })
+variable "public_network_access_enabled" {
+  description = "Enable or disable public network access, defaults to false"
+  type        = bool
+  default     = false
 }
+
+variable "sku" {
+  description = "The SKU of the Recovery Services Vault, defaults to 'Standard'"
+  type        = string
+  default     = "Standard"
+}
+
+variable "soft_delete_enabled" {
+  description = "Enable or disable soft delete for the vault, defaults to true"
+  type        = bool
+  default     = true
+}
+
+variable "immutability" {
+  description = "Enable or disable immutability for backups in the vault."
+  type        = bool
+  default     = null
+}
+
+variable "storage_mode_type" {
+  description = "The storage mode type for the vault. Possible values are 'GeoRedundant', 'LocallyRedundant', or 'ZoneRedundant', defaults to 'ZoneRedundant'"
+  type        = string
+  default     = "GeoRedundant"
+}
+
+variable "cross_region_restore_enabled" {
+  description = "Enable or disable cross region restore for backups in the vault."
+  type        = bool
+  default     = false
+}
+
+variable "location" {
+  description = "Location of the resources to create"
+  type        = string
+}
+
+variable "tags" {
+  type        = map(string)
+  description = "A map of tags to add to vault."
+  default     = {}
+}
+
 
 variable "vm_backup_policy" {
   type = map(object({
