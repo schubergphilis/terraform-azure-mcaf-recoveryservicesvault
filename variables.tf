@@ -28,7 +28,7 @@ variable "soft_delete_enabled" {
 
 variable "immutability" {
   description = "Enable or disable immutability for backups in the vault."
-  type        = bool
+  type        = string
   default     = null
 }
 
