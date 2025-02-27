@@ -42,7 +42,7 @@ resource "azurerm_recovery_services_vault" "this" {
 }
 
 resource "azurerm_role_assignment" "this" {
-  count                = (var.system_assigned_identity_enabled != null && var.cmk_key_vault_key_id != null) ? 1 : 0
+  count                = (var.system_assigned_identity_enabled == true && var.cmk_key_vault_key_id != null) ? 1 : 0
   principal_id         = azurerm_recovery_services_vault.this.identity[0].principal_id
   scope                = var.cmk_key_vault_key_id
   role_definition_name = "Key Vault Crypto Service Encryption User"

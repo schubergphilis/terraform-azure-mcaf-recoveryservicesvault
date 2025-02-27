@@ -63,7 +63,7 @@ variable "cmk_key_vault_key_id" {
 }
 
 variable "user_assigned_identities" {
-  description = "List of user-assigned resource IDs for identity assignment."
+  description = "Set of user-assigned resource IDs for identity assignment."
   type        = set(string)
   default     = []
 }
