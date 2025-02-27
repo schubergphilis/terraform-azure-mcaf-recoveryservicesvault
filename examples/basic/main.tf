@@ -10,32 +10,27 @@ terraform {
 }
 
 module "recoveryservicesvault" {
-  source              = "../../"
-  resource_group_name = "example-recovery-services-vault-rg"
-  recovery_services_vault = {
-    name                             = "example-recoveryservicesvault"
-    location                         = "eastus"
-    public_network_access_enabled    = false
-    sku                              = "Standard"
-    storage_mode_type                = "GeoRedundant"
-    cross_region_restore_enabled     = true
-    soft_delete_enabled              = true
-    system_assigned_identity_enabled = true
-    immutability                     = "Unlocked"
-  }
+  source                           = "../../"
+  resource_group_name              = "example-recovery-services-vault-rg"
+  name                             = "example-recoveryservicesvault"
+  location                         = "eastus"
+  public_network_access_enabled    = false
+  sku                              = "Standard"
+  storage_mode_type                = "GeoRedundant"
+  cross_region_restore_enabled     = true
+  soft_delete_enabled              = true
+  system_assigned_identity_enabled = true
+  immutability                     = "Unlocked"
+  cmk_key_vault_key_id             = "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-keyvault-rg/providers/Microsoft.KeyVault/vaults/example-keyvault/keys/example-key"
+  cmk_identity_id                  = "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-keyvault-rg/providers/Microsoft.KeyVault/vaults/example-keyvault"
 
-  rsv_encryption = {
-    cmk_encryption_enabled = true
-    cmk_key_vault_key_id   = "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-keyvault-rg/providers/Microsoft.KeyVault/vaults/example-keyvault/keys/example-key"
-    cmk_identity           = "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-keyvault-rg/providers/Microsoft.KeyVault/vaults/example-keyvault"
-  }
 
   vm_backup_policy = {
     example_policy = {
       name                           = "example-vm-backup-policy"
       timezone                       = "UTC"
       instant_restore_retention_days = 5
-      policy_type                    = "AzureIaasVM"
+      policy_type                    = "V2"
       frequency                      = "Daily"
       retention_daily                = 7
 
